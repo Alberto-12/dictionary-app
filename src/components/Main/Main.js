@@ -214,6 +214,7 @@ const Main = ({ darkMode, selectedFont }) => {
             type="text"
             id="search-input"
             name="search"
+            placeholder="Search for any word…"
             style={{
               backgroundImage: `url(${SearchIcon})`,
               backgroundRepeat: "no-repeat",
