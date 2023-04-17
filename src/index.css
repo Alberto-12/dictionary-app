@@ -1,0 +1,84 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  background: #ffffff;
+}
+
+#dictionary {
+    width: 327px;
+    display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-top: 10%;
+  margin-bottom: 8%;
+}
+
+.dark-mode header {
+  background-color: #050505;
+}
+
+body:has(div.dark-mode) {
+    background-color: #050505;
+  }
+
+  .dark-mode #dictionary {
+      background-color: #050505;
+  }
+
+  #dictionary-container[data-font-family="serif"] .selected-option,
+  #dictionary-container[data-font-family="serif"] .options {
+    font-family: 'Lora';
+    font-style: normal;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 24px;
+  }
+  
+
+@media (min-width: 768px) {
+  body {
+      display: flex;
+      align-items: center;
+  }
+
+  #dictionary {
+
+      width: 689px;
+      min-width: 689px; 
+  }
+
+  header {
+    margin-bottom: 5%;
+    width: 100%;
+  }
+} 
+
+
+
+@media (min-width: 1024px) {
+  #dictionary {
+    width: 737px;
+    min-width: 737px
+  }
+
+  header {
+    margin-top: 5%;
+  }
+}

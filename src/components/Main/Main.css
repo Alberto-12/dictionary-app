@@ -1,0 +1,334 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inconsolata:wght@400;700&display=swap");
+
+#search-input {
+  width: 100%;
+  height: 48px;
+  background: #f4f4f4;
+  border-radius: 16px;
+  border: none;
+  padding-left: 7%;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  color: #2d2d2d;
+}
+
+form {
+  margin-bottom: 8%;
+}
+
+::placeholder {
+  opacity: 0.25;
+}
+
+#word-audio-div {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9%;
+}
+
+#error-message-hidden {
+}
+
+#word {
+  margin-bottom: 8%;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 39px;
+  color: #2d2d2d;
+}
+
+#phonetic {
+  color: #a445ed;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+#play-icon {
+    background-repeat: no-repeat;
+    background-size: contain;
+    border-radius: 50%;
+
+}
+
+
+#play-icon:hover {
+  
+}
+
+#definition-div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 9%;
+}
+
+#definition {
+  font-style: italic;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+#meaning {
+  margin-bottom: 5%;
+  color: #757575;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+hr {
+  width: 75%;
+  border: 0.5px solid #e9e9e9;
+}
+
+ul {
+  margin-bottom: 9%;
+}
+
+ul li::marker {
+  color: #8f19e8;
+}
+
+li {
+  width: 85%;
+  padding-left: 5%;
+  color: #2d2d2d;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+ul li {
+  margin: 5%;
+}
+
+#example {
+  width: 100%;
+  list-style-type: none;
+  color: #757575;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 24px;
+}
+
+#synonymos-div {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+#synonymos {
+  color: #757575;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+}
+
+#synonymos-example {
+  color: #a445ed;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 19px;
+  margin-left: 2rem;
+}
+
+#bottom-hr {
+  width: 100%;
+  border: 0.5px solid #e9e9e9;
+  margin-bottom: 9%;
+}
+
+#link-div {
+  margin-bottom: 20%;
+}
+
+#source-div {
+  width: 87%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#source {
+  margin-bottom: 5px;
+  color: #757575;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+#link {
+  color: #2d2d2d;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 17px;
+}
+
+#main-container {
+  width: 100%;
+}
+
+#error-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 10em;
+  margin-top: 40px;
+}
+
+#error-emoji {
+   font-size: 64px;
+}
+
+#first-error-message {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #2D2D2D;
+}
+
+#second-error-message {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 24px;
+  text-align: center;
+  color: #757575;
+}
+
+.dark-mode #main-container {
+  background-color: #050505;
+  color: white;
+}
+
+.dark-mode #search-input {
+  background-color: #1f1f1f;
+  color: white;
+}
+
+.dark-mode #word {
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  form {
+    margin-bottom: 5%;
+  }
+
+  #play-icon {
+    width: 80px !important;
+    height: 80px !important;
+  }
+
+  #definition-div {
+    margin-bottom: 5%;
+  }
+
+  #word-audio-div {
+    margin-bottom: 5%;
+  }
+
+  ul li {
+    margin: 1%;
+  }
+
+  li {
+    width: 75%;
+    padding-left: 2%;
+  }
+
+  ul {
+    margin-left: 5%;
+    margin-bottom: 5%;
+  }
+
+  #synonymos-div {
+    width: 40%;
+    margin-bottom: 5%;
+  }
+
+  #meaning {
+    margin-bottom: 3%;
+    font-size: 20px;
+    line-height: 21px;
+  }
+
+  #bottom-hr {
+    margin-bottom: 5%;
+  }
+
+  #link-div {
+    display: flex;
+    align-items: center;
+  }
+
+  #source-div {
+    width: 280px;
+    margin-left: 2%;
+  }
+
+  #source {
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 15px;
+  }
+
+  #word {
+    font-size: 64px;
+    line-height: 67px;
+  }
+
+  #phonetic {
+    font-size: 24px;
+    line-height: 29px;
+  }
+
+  #definition {
+    font-size: 24px;
+    line-height: 25px;
+  }
+
+  li {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  #link {
+    font-size: 14px;
+    line-height: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  #word {
+    font-size: 64px;
+    line-height: 77px;
+  }
+
+  #meaning {
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  ul {
+    width: 128%;
+  }
+}
