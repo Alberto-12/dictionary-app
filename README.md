@@ -16,8 +16,6 @@ This is a solution to the [Dictionary web app challenge on Frontend Mentor](http
 - [Author](#author)
 - [Acknowledgments](#acknowledgments)
 
-**Note: Delete this note and update the table of contents based on what sections you keep.**
-
 ## Overview
 
 ### The challenge
@@ -26,30 +24,18 @@ Users should be able to:
 
 - Search for words using the input field
 - See the Free Dictionary API's response for the searched word
-- See a form validation message when trying to submit a blank form
 - Play the audio file for a word when it's available
 - Switch between serif, sans serif, and monospace fonts
 - Switch between light and dark themes
 - View the optimal layout for the interface depending on their device's screen size
 - See hover and focus states for all interactive elements on the page
-- **Bonus**: Have the correct color scheme chosen for them based on their computer preferences. _Hint_: Research `prefers-color-scheme` in CSS.
 
 ### Screenshot
-
-![](./screenshot.jpg)
-
-Add a screenshot of your solution. The easiest way to do this is to use Firefox to view your project, right-click the page and select "Take a Screenshot". You can choose either a full-height screenshot or a cropped one based on how long the page is. If it's very long, it might be best to crop it.
-
-Alternatively, you can use a tool like [FireShot](https://getfireshot.com/) to take the screenshot. FireShot has a free option, so you don't need to purchase it. 
-
-Then crop/optimize/edit your image however you like, add it to your project, and update the file path in the image above.
-
-**Note: Delete this note and the paragraphs above when you add your screenshot. If you prefer not to add a screenshot, feel free to remove this entire section.**
+![](./src/assets/images/Screenshot%202023-04-17%20at%2015-18-30%20Dictionary%20App.png)
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Live Site URL: [ live site URL here](https://dictionarius-app.netlify.app/)
 
 ## My process
 
@@ -58,61 +44,137 @@ Then crop/optimize/edit your image however you like, add it to your project, and
 - Semantic HTML5 markup
 - CSS custom properties
 - Flexbox
-- CSS Grid
 - Mobile-first workflow
 - [React](https://reactjs.org/) - JS library
-- [Next.js](https://nextjs.org/) - React framework
-- [Styled Components](https://styled-components.com/) - For styles
-
-**Note: These are just examples. Delete this note and replace the list above with your own choices**
 
 ### What I learned
 
-Use this section to recap over some of your major learnings while working through this project. Writing these out and providing code samples of areas you want to highlight is a great way to reinforce your own knowledge.
+During this project, I learned several new skills related to web development, including:
 
-To see how you can add code snippets, see below:
+- API integration: I learned how to use an API to retrieve data and display it on a web page. Specifically, I integrated the Free Dictionary API to allow users to search for words and see the API's response.
 
-```html
-<h1>Some HTML code I'm proud of</h1>
-```
-```css
-.proud-of-this-css {
-  color: papayawhip;
+- Audio playback: I learned how to play audio files using JavaScript, which allowed me to include a feature that plays the pronunciation of a word when it's available in the API response.
+
+- Font switching: I learned how to allow users to switch between different font styles (serif, sans-serif, and monospace) using JavaScript and CSS.
+
+- Theme switching: I learned how to allow users to switch between light and dark themes, which involved changing the CSS styles of various elements based on the user's selection.
+
+- Responsive design: I learned how to create a responsive design that adapts to different screen sizes and orientations, using CSS media queries and other techniques.
+
+- Accessibility: I learned how to incorporate hover and focus states for interactive elements on the page, making the app more accessible to users with visual impairments or using assistive technology.
+
+Overall, this project helped me develop a better understanding of various web development concepts and techniques, and provided me with valuable hands-on experience in creating a fully functional web application from scratch.
+
+I'm really porud of the component I created for FontSelection. Here's the snippet:
+
+```jsx
+const CustomSelectBox = ({ darkMode, selectedFont, onFontSelect }) => {
+  const [selectedOption, setSelectedOption] = useState({
+    label: "San Serif",
+    value: "Inter",
+  });
+  const [fontFamily, setFontFamily] = useState("Inter");
+  const options = [
+    { label: "San Serif", value: "Inter", dataFont: "Inter" },
+    { label: "Serif", value: "Lora", dataFont: "Lora" },
+    { label: "Mono", value: "Inconsolata", dataFont: "Inconsolata" },
+  ];
+  const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+  const ref = useRef(null);
+
+  const handleArrowClick = () => {
+    setIsOptionsOpen(!isOptionsOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    setSelectedOption(option);
+    setIsOptionsOpen(false);
+    const selectedOption = options.find((o) => o.label === option.label);
+    if (selectedOption) {
+      const selectedFont = selectedOption.dataFont;
+      setFontFamily(selectedFont);
+      onFontSelect(selectedFont);
+    }
+  };
+
+  useEffect(() => {
+    console.log("fontFamily:", fontFamily);
+    if (ref.current) {
+      const selectedElement = ref.current.querySelector(
+        `[data-font="${fontFamily}"]`
+      );
+      console.log("selectedElement:", selectedElement);
+      if (selectedElement) {
+        selectedElement.classList.add("selected");
+      }
+    }
+  }, [ref, fontFamily]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOptionsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [ref]);
+
+  return (
+    <div id="header-container" className={darkMode ? "dark-mode" : ""}>
+      <img src={Logo} alt="Logo" />
+      <div className={`custom-select-box ${darkMode ? "dark-mode" : ""}`}>
+        <div className={`select-box ${isOptionsOpen ? "open" : ""}`} ref={ref}>
+          <div
+            className={`selected-option ${selectedOption.value.toLowerCase()}-font`}
+            onClick={handleArrowClick}
+          >
+            {selectedOption.label}
+            <img id="arrow" src={Arrow} alt="Arrow down" />
+          </div>
+          {isOptionsOpen && (
+            <div className="options" style={{ fontFamily: fontFamily }}>
+              {options.map((option) => (
+                <div
+                  key={option.value}
+                  className={`option ${
+                    selectedOption.value === option.value ? "selected" : ""
+                  }`}
+                  data-font={option.dataFont}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  {option.label}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
 }
 ```
-```js
-const proudOfThisFunc = () => {
-  console.log('🎉')
-}
-```
-
-If you want more help with writing markdown, we'd recommend checking out [The Markdown Guide](https://www.markdownguide.org/) to learn more.
-
-**Note: Delete this note and the content within this section and replace with your own learnings.**
-
 ### Continued development
 
-Use this section to outline areas that you want to continue focusing on in future projects. These could be concepts you're still not completely comfortable with or techniques you found useful that you want to refine and perfect.
+While I'm satisfied with the functionality and design of the current version of the dictionary app, there are several areas where I could continue to develop and improve the app in the future. Some possible directions for continued development include:
 
-**Note: Delete this note and the content within this section and replace with your own plans for continued development.**
+- Improved search functionality: Currently, the app relies on exact matches for word searches. In the future, I could implement more advanced search algorithms to allow for partial matches, synonyms, and related words.
 
-### Useful resources
+- Expanded API support: While the Free Dictionary API provides a rich source of word data, there are other APIs that could be integrated to provide additional features or data. For example, I could integrate an API for word translation, or a database of idioms and expressions.
 
-- [Example resource 1](https://www.example.com) - This helped me for XYZ reason. I really liked this pattern and will use it going forward.
-- [Example resource 2](https://www.example.com) - This is an amazing article which helped me finally understand XYZ. I'd recommend it to anyone still learning this concept.
+- User accounts and personalized features: In the future, I could add support for user accounts and personalized features, such as saving favorite words or creating custom word lists.
 
-**Note: Delete this note and replace the list above with resources that helped you during the challenge. These could come in handy for anyone viewing your solution or for yourself when you look back on this project in the future.**
+- Improved accessibility: While the current version of the app includes basic accessibility features, there is always room for improvement. I could work on further improving the app's accessibility for users with different needs and abilities.
+
+Overall, I believe there is significant potential for continued development and improvement of the dictionary app, and I look forward to exploring these possibilities in the future.
 
 ## Author
 
-- Website - [Add your name here](https://www.your-site.com)
-- Frontend Mentor - [@yourusername](https://www.frontendmentor.io/profile/yourusername)
-- Twitter - [@yourusername](https://www.twitter.com/yourusername)
-
-**Note: Delete this note and add/remove/edit lines above based on what links you'd like to share.**
+- Frontend Mentor - [@Alberto-12](https://www.frontendmentor.io/profile/Alberto-12)
 
 ## Acknowledgments
 
-This is where you can give a hat tip to anyone who helped you out on this project. Perhaps you worked in a team or got some inspiration from someone else's solution. This is the perfect place to give them some credit.
-
-**Note: Delete this note and edit this section's content as necessary. If you completed this challenge by yourself, feel free to delete this section entirely.**
+I'm very thankful for my mentor [Tresure Kabareebe](https://github.com/trekab) that guided me through the process.
